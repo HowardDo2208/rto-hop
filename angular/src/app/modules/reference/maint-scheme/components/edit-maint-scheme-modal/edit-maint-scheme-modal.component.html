@@ -1,0 +1,117 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <div class="modal-title h4" id="example-modal-sizes-title-lg">
+            <ng-container *ngIf="maintScheme">
+                <ng-container *ngIf="maintScheme.id">Edit</ng-container>
+                <ng-container *ngIf="!maintScheme.id">Create</ng-container>
+                Maintenance Scheme
+                <ng-container *ngIf="maintScheme.id">'{{maintScheme.maintSchemeName}}'</ng-container>
+            </ng-container>
+        </div>
+    </div>
+    <div class="overlay overlay-block cursor-default modal-body" style="min-height: 404px;">
+        <ng-container *ngIf="isLoading$ | async">
+            <div class="overlay-layer bg-transparent">
+                <div class="spinner spinner-lg spinner-success"></div>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="maintScheme">
+            <form action="#" class="form form-label-right" [formGroup]="formGroup">
+                <div class="form-group row">
+                    <div class="col-lg-6">
+                        <label class="form-label">Enter Code</label>
+                        <input type="text" class="form-control form-control-lg form-control-solid"
+                            name="maintSchemeCode" placeholder="Maint Scheme Code" autocomplete="off"
+                            [class.is-invalid]="isControlInvalid('maintSchemeCode')"
+                            [class.is-valid]="isControlValid('maintSchemeCode')" formControlName="maintSchemeCode" />
+                        <div class="valid-feedback" *ngIf="isControlValid('maintSchemeCode')">Maint Scheme Code was
+                            entered correct
+                        </div>
+                        <div class="invalid-feedback" *ngIf="controlHasError('required', 'maintSchemeCode')">Maint
+                            Scheme Code
+                            is
+                            required</div>
+                        <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'maintSchemeCode')">Maint
+                            Scheme
+                            Code
+                            should have at
+                            least 3 symbols</div>
+                        <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'maintSchemeCode')">Maint
+                            Scheme
+                            Code
+                            should have
+                            maximum 100 symbols</div>
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="form-label">Maint Scheme Name</label>
+                        <input type="text" class="form-control form-control-lg form-control-solid  is-invalid"
+                            name="maintSchemeName" placeholder="Maint Scheme Name" autocomplete="off"
+                            [class.is-invalid]="isControlInvalid('maintSchemeName')"
+                            [class.is-valid]="isControlValid('maintSchemeName')" formControlName="maintSchemeName" />
+                        <div class="valid-feedback" *ngIf="isControlValid('maintSchemeName')">Maint Scheme Name was
+                            entered correct
+                        </div>
+                        <div class="invalid-feedback" *ngIf="controlHasError('required', 'maintSchemeName')">Maint
+                            Scheme Name is
+                            required</div>
+                        <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'maintSchemeName')">Maint
+                            Scheme Name should
+                            have at
+                            least 3 symbols</div>
+                        <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'maintSchemeName')">Maint
+                            Scheme Name should
+                            have maximum
+                            100 symbols</div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-6">
+                        <label class="form-label">Enter Cost Per Visit</label>
+                        <input type="number" class="form-control form-control-lg form-control-solid" name="costPerVisit"
+                            placeholder="Cost Per Visit" autocomplete="off"
+                            [class.is-invalid]="isControlInvalid('costPerVisit')"
+                            [class.is-valid]="isControlValid('costPerVisit')" formControlName="costPerVisit" />
+                        <div class="valid-feedback" *ngIf="isControlValid('costPerVisit')">Cost Per Visit was entered
+                            correct
+                        </div>
+                        <div class="invalid-feedback" *ngIf="controlHasError('required', 'costPerVisit')">Cost Per Visit
+                            is
+                            required
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="form-label">Enter Interval Of Visit</label>
+                        <input type="number" class="form-control form-control-lg form-control-solid"
+                            name="intervalOfVisit" placeholder="intervalOfVisit" autocomplete="off"
+                            [class.is-invalid]="isControlInvalid('intervalOfVisit')"
+                            [class.is-valid]="isControlValid('intervalOfVisit')" formControlName="intervalOfVisit" />
+                        <div class="valid-feedback" *ngIf="isControlValid('intervalOfVisit')">Interval Of Visit was
+                            entered correct</div>
+                        <div class="invalid-feedback" *ngIf="controlHasError('required', 'intervalOfVisit')">
+                            Interval Of Visit is required
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-12">
+                        <label class="form-label">Enter Remark</label>
+                        <textarea class="form-control form-control-lg form-control-solid" name="maintSchemeRemark"
+                            placeholder="Remark" autocomplete="off"
+                            [class.is-invalid]="isControlInvalid('maintSchemeRemark')"
+                            [class.is-valid]="isControlValid('maintSchemeRemark')" formControlName="maintSchemeRemark">
+                        </textarea>
+                    </div>
+                </div>
+            </form>
+        </ng-container>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light btn-elevate mr-2" (click)="modal.dismiss()">Cancel</button>
+        <ng-container *ngIf="maintScheme">
+
+            <button type="submit" class="btn btn-primary btn-elevate" (click)="save()"
+                [disabled]="formGroup.invalid">Save</button>
+        </ng-container>
+    </div>
+</div>
